@@ -1,5 +1,10 @@
 import React from "react";
 import logodark from "../../assets/logo-dark.svg";
+import iconlighttheme from "../../assets/icon-light-theme.svg";
+import icondarktheme from "../../assets/icon-dark-theme.svg";
+import iconhide from "../../assets/icon-hide-sidebar.svg";
+import check from "../../assets/icon-board.svg";
+
 export default function SideBar() {
   let data = require("../../starter-code/data.json");
   let sideBarData = data.boards;
@@ -14,8 +19,24 @@ export default function SideBar() {
         })}
         <div>Create a Board</div>
       </div>
-      <div className="theme_Container"></div>
-      <div className="show_hide_SideBar_Container"></div>
+      <div className="theme_Container">
+        <img src={iconlighttheme} alt="" />
+        <input
+          className="react-switch-checkbox"
+          id={`react-switch-new`}
+          type="checkbox"
+        />
+        <label className="react-switch-label" htmlFor={`react-switch-new`}>
+          <span className={`react-switch-button`} />
+        </label>
+        <img src={icondarktheme} alt="" />
+      </div>
+      <div className="show_hide_SideBar_Container">
+        <img src={iconhide} alt="" />
+        <div>
+          <p className="hide_SideBar_Text">Hide Sidebar</p>
+        </div>
+      </div>
     </div>
   );
 }
