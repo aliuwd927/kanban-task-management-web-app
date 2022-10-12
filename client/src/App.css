@@ -45,6 +45,7 @@
 }
 
 /* Slide Toggle */
+
 .slide_Toggle {
   height: 0;
   width: 0;
@@ -84,3 +85,7 @@
 
 
 /* End Slide Toggle */
+
+/*
+https://upmostly.com/tutorials/build-a-react-switch-toggle-component
+*/
