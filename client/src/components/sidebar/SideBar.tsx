@@ -3,7 +3,6 @@ import logodark from "../../assets/logo-dark.svg";
 import iconlighttheme from "../../assets/icon-light-theme.svg";
 import icondarktheme from "../../assets/icon-dark-theme.svg";
 import iconhide from "../../assets/icon-hide-sidebar.svg";
-import check from "../../assets/icon-board.svg";
 
 export default function SideBar() {
   let data = require("../../starter-code/data.json");
@@ -22,12 +21,12 @@ export default function SideBar() {
       <div className="theme_Container">
         <img src={iconlighttheme} alt="" />
         <input
-          className="react-switch-checkbox"
+          className="slide_Toggle"
           id={`react-switch-new`}
           type="checkbox"
         />
-        <label className="react-switch-label" htmlFor={`react-switch-new`}>
-          <span className={`react-switch-button`} />
+        <label className="switch_Label" htmlFor={`react-switch-new`}>
+          <span className={`switch_Button`} />
         </label>
         <img src={icondarktheme} alt="" />
       </div>
