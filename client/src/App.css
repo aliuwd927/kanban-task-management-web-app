@@ -1,16 +1,27 @@
 @import-normalize;
+
 * {
   box-sizing: border-box;
 }
+
 .App {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  gap:5px
+}
+
+.task_Section_Container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .side_Bar_Container{
   max-width: 300px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   outline: auto;
 }
 
@@ -24,22 +35,36 @@
   padding: 24px;
 }
 
-.task_Container{
+.add_task_Container{
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 24px;
+  max-width: 192px;
+  width: 100%;
 }
 
 .theme_Container{
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
-  height: 20px;
-
+  height: 48px;
+  margin-top: 435px;
+  margin-bottom: 8px;
+  margin-left: 24px;
+  background-color: #F4F7FD;
+  width: 250px;
+  border-radius: 50px;
 }
 
 .show_hide_SideBar_Container{
   display: flex;
+  width: 276px;
+  height: 48px;
+  margin-bottom: 32px;
+  gap:15px;
+  cursor: pointer;
 }
 
 .slide_Container{
@@ -48,9 +73,64 @@
   border-radius: 15px;
 }
 
+.icon_Hide_Img{
+  width:18px;
+  height: 16px;
+}
+.icon_Light_Theme_Img,
+.icon_Dark_Theme_Img{
+  width: 18px;
+  height: 18px;
+}
 .hide_SideBar_Text{
   margin: 0 auto;
   font-size: 1rem;
+}
+
+.create_a_board_Text{
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.logoDark_Img{
+  margin-top: 34px;
+  margin-left: 34px;
+}
+
+.board_Container{
+  margin-top: 112px;
+}
+
+.all_Boards_Text{
+  margin-left: 32px;
+  margin-bottom: 19px;
+}
+
+
+.show_hide_SideBar_Container > :first-child{
+  margin-left: 32px;
+}
+
+.board_Button{
+  height: 48px;
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.board_Button:hover,
+.create_a_board_Text:hover{
+  background-color: #635FC7;
+}
+
+.task_Container{
+  width: 100%;
+  height: 100%;
+  outline: auto;
 }
 
 /* Add Task Button*/

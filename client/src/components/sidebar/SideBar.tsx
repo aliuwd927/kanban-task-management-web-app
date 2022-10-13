@@ -10,16 +10,20 @@ export default function SideBar() {
   console.log(sideBarData);
   return (
     <div className="side_Bar_Container">
-      <img src={logodark} alt="" />
+      <img src={logodark} alt="" className="logoDark_Img" />
       <div className="board_Container">
-        <div>All Boards</div>
+        <div className="all_Boards_Text">All Boards</div>
         {sideBarData.map((element: any, index: number) => {
-          return <div key={index}>{element.name}</div>;
+          return (
+            <div key={index} className="board_Button">
+              {element.name}
+            </div>
+          );
         })}
-        <div>Create a Board</div>
+        <div className="create_a_board_Text">+ Create a Board</div>
       </div>
       <div className="theme_Container">
-        <img src={iconlighttheme} alt="" />
+        <img src={iconlighttheme} alt="" className="icon_Light_Theme_Img" />
         <input
           className="slide_Toggle"
           id={`react-switch-new`}
@@ -28,11 +32,11 @@ export default function SideBar() {
         <label className="switch_Label" htmlFor={`react-switch-new`}>
           <span className={`switch_Button`} />
         </label>
-        <img src={icondarktheme} alt="" />
+        <img src={icondarktheme} alt="" className="icon_Dark_Theme_Img" />
       </div>
       <div className="show_hide_SideBar_Container">
-        <img src={iconhide} alt="" />
-        <div>
+        <img src={iconhide} alt="" className="icon_Hide_Img" />
+        <div className="hide_SideBar_Container">
           <p className="hide_SideBar_Text">Hide Sidebar</p>
         </div>
       </div>
