@@ -3,9 +3,10 @@ import logodark from "../../assets/logo-dark.svg";
 import iconlighttheme from "../../assets/icon-light-theme.svg";
 import icondarktheme from "../../assets/icon-dark-theme.svg";
 import iconhide from "../../assets/icon-hide-sidebar.svg";
+import { Root, Board } from "../TS Interface JSON/starterInterface";
 
 export default function SideBar() {
-  let data = require("../../starter-code/data.json");
+  let data: Root = require("../../starter-code/data.json");
   let sideBarData = data.boards;
   console.log(sideBarData);
   return (
@@ -13,7 +14,7 @@ export default function SideBar() {
       <img src={logodark} alt="" className="logoDark_Img" />
       <div className="board_Container">
         <div className="all_Boards_Text">All Boards</div>
-        {sideBarData.map((element: any, index: number) => {
+        {sideBarData.map((element, index: number) => {
           return (
             <div key={index} className="board_Button">
               {element.name}
