@@ -3,7 +3,7 @@ import logodark from "../../assets/logo-dark.svg";
 import iconlighttheme from "../../assets/icon-light-theme.svg";
 import icondarktheme from "../../assets/icon-dark-theme.svg";
 import iconhide from "../../assets/icon-hide-sidebar.svg";
-import { Root, Board } from "../TS Interface JSON/starterInterface";
+import { Root } from "../TS Interface JSON/starterInterface";
 
 export default function SideBar() {
   let data: Root = require("../../starter-code/data.json");
