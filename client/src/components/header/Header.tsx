@@ -1,5 +1,4 @@
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
-import TaskContainer from "./TaskContainer";
 
 export default function HeaderTask() {
   return (
