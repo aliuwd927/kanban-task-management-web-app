@@ -23,6 +23,7 @@
   width: 100%;
   height: 100%;
   outline: auto;
+  background-color: #FFFFFF;
 }
 
 .header_Add_Task_Container{
@@ -33,6 +34,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
+  background-color: #FFFFFF;
 }
 
 .add_task_Container{
@@ -131,11 +133,32 @@
 }
 
 .task_Container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  background-color: #E4EBFA;
   outline: auto;
 }
 
+.board_Default_Empty_Container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.add_Column_Button{
+  width: 178px;
+  height: 48px;
+  background-color: #635FC7;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
 /* Add Task Button*/
 
 .add_Task{
@@ -150,7 +173,8 @@
   cursor: pointer;
 }
 
-.add_Task:hover{
+.add_Task:hover,
+.add_Column_Button:hover{
   background-color: #A8A4FF;
 }
 /* Add Task Button*/

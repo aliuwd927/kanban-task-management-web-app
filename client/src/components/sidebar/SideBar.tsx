@@ -1,4 +1,3 @@
-import React from "react";
 import logodark from "../../assets/logo-dark.svg";
 import iconlighttheme from "../../assets/icon-light-theme.svg";
 import icondarktheme from "../../assets/icon-dark-theme.svg";

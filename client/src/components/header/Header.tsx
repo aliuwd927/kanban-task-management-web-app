@@ -1,4 +1,3 @@
-import React from "react";
 import iconEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 import TaskContainer from "./TaskContainer";
 
