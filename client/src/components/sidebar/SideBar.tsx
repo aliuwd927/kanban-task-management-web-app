@@ -25,6 +25,7 @@ export default function SideBar() {
       </div>
       <div className="theme_Container">
         <img src={iconlighttheme} alt="" className="icon_Light_Theme_Img" />
+        <div className="overlay"></div>
         <input
           className="slide_Toggle"
           id={`react-switch-new`}
