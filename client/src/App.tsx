@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import HeaderTask from "./components/header/Header";
 import TaskContainer from "./components/header/TaskContainer";
