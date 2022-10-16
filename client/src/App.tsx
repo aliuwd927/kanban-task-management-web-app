@@ -1,12 +1,12 @@
 import "./App.css";
 import HeaderTask from "./components/header/Header";
 import TaskContainer from "./components/header/TaskContainer";
-import SideBar from "./components/sidebar/SideBar";
+import SideBarComponent from "./components/sidebar/SideBarComponent";
 
 function App() {
   return (
     <div className="App">
-      <SideBar />
+      <SideBarComponent />
       <div className="task_Section_Container">
         <HeaderTask />
         <TaskContainer />
@@ -16,3 +16,4 @@ function App() {
 }
 
 export default App;
+//https://frontend.turing.edu/lessons/module-3/advanced-react-hooks.html
