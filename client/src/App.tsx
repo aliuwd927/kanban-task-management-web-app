@@ -7,7 +7,7 @@ import TaskContainer from "./components/header/TaskContainer";
 import SideBarComponent from "./components/sidebar/SideBarComponent";
 
 const initalState = {
-  storeData: [],
+  storeData: {},
 };
 
 const reducer = (state: any, action: any) => {

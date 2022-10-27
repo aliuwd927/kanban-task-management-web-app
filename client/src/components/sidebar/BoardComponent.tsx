@@ -2,11 +2,11 @@ import { Root } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import { useContext } from "react";
 export default function BoardComponent() {
-  const value = useContext(KanbanInfo);
+  const value: Root = useContext(KanbanInfo);
   // let data: Root = require("../../starter-code/data.json");
   // let sideBarData = data.boards;
   //console.log(sideBarData);
-  console.log(value);
+
   return (
     <div className="board_Container">
       <div className="all_Boards_Text">All Boards</div>
