@@ -1,16 +1,19 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import "./App.css";
 import KanbanInfo from "./kanbanContextProvider";
 import { Root } from "./components/TS Interface JSON/starterInterface";
+import { Action } from "./components/TS Interface JSON/actionInterface";
+import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
 import TaskContainer from "./components/header/TaskContainer";
 import SideBarComponent from "./components/sidebar/SideBarComponent";
+//Also make sure implement ZOD
 
-const initalState = {
-  storeData: {},
+const initalState: Inital = {
+  storeData: {} as Root,
 };
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: Inital, action: Action) => {
   switch (action.type) {
     case "STORE":
       return { ...state, storeData: action.data };
