@@ -3,7 +3,6 @@ import { useContext } from "react";
 export default function BoardComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
   const sideElement = state?.storeData.boards;
-  console.log(sideElement);
 
   return (
     <div className="board_Container">
