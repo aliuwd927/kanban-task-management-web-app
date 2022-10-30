@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import "./App.css";
 import KanbanInfo from "./kanbanContextProvider";
 import { Root } from "./components/TS Interface JSON/starterInterface";
-import { Action } from "./components/TS Interface JSON/actionInterface";
+import { ActionType } from "./components/TS Interface JSON/actionInterface";
 import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
 import TaskContainer from "./components/header/TaskContainer";
@@ -11,12 +11,16 @@ import SideBarComponent from "./components/sidebar/SideBarComponent";
 
 const initalState: Inital = {
   storeData: {} as Root,
+  boardName: "",
 };
 
-const reducer = (state: Inital, action: Action) => {
+const reducer = (state: Inital, action: ActionType) => {
   switch (action.type) {
-    case "STORE":
+    case "STOREAPI":
       return { ...state, storeData: action.data };
+    case "STORETEXT":
+      console.log(state.boardName);
+      return { ...state, boardName: action.boardValue };
     default:
       return state;
   }
@@ -30,7 +34,7 @@ function App() {
     //action is an object
     //action has two properties, type and data
     //spread the state, target storeData and use action.data due to line 30.
-    let action = { type: "STORE", data };
+    let action: ActionType = { type: "STOREAPI", data };
     dispatch(action);
   }, []);
 

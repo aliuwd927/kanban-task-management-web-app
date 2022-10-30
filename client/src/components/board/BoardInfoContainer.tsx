@@ -14,7 +14,7 @@ export default function BoardInfoComponent() {
 
   const [colArr] =
     boardArr?.map((element) => {
-      console.log(element.columns);
+      //console.log(element.columns);
       return element?.columns;
     }) ?? [];
   return (
