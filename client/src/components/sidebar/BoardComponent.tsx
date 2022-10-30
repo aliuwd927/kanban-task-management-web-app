@@ -1,5 +1,5 @@
 import KanbanInfo from "../../kanbanContextProvider";
-import { MouseEvent, useCallback, useContext, useEffect } from "react";
+import { MouseEvent, useContext } from "react";
 import { ActionType } from "../TS Interface JSON/actionInterface";
 
 export default function BoardComponent() {
