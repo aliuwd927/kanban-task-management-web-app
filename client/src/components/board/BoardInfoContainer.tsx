@@ -3,7 +3,12 @@ import KanbanInfo from "../../kanbanContextProvider";
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
   const boardArr = state?.storeData?.boards;
-
+  //Testing to see name.
+  boardArr?.map((element) => {
+    if (state.boardName === element.name) {
+      console.log(element.name);
+    }
+  });
   /*
 
   ad0ran: its like the || but only against undefined/null values

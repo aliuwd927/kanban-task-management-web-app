@@ -27,7 +27,6 @@ export default function BoardComponent() {
       </div>
     );
   });
-
   return (
     <div className="board_Container">
       <div className="all_Boards_Text">All Boards</div>

@@ -19,7 +19,6 @@ const reducer = (state: Inital, action: ActionType) => {
     case "STOREAPI":
       return { ...state, storeData: action.data };
     case "STORETEXT":
-      console.log(state.boardName);
       return { ...state, boardName: action.boardValue };
     default:
       return state;
