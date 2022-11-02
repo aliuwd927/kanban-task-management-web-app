@@ -3,12 +3,15 @@ import KanbanInfo from "../../kanbanContextProvider";
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
   const boardArr = state?.storeData?.boards;
-  //Testing to see name.
+
+  //Testing Things
   boardArr?.map((element) => {
     if (state.boardName === element.name) {
-      console.log(element.name);
+      //console.log(element.columns);
     }
   });
+
+
   /*
 
   ad0ran: its like the || but only against undefined/null values
@@ -17,11 +20,19 @@ export default function BoardInfoComponent() {
 
   */
 
-  const [colArr] =
-    boardArr?.map((element) => {
-      //console.log(element.columns);
-      return element?.columns;
-    }) ?? [];
+  // let [colArr] =
+  //   boardArr?.map((element) => {
+  //     if(state.boardName === element.name){
+  //       //console.log(element)
+  //       return element?.columns;
+  //     }
+  //   }) ?? [];
+
+  let [colArr] = boardArr?.filter(element => element.name === state.boardName).map(element => {
+    return element?.columns
+  }) ?? []
+
+  console.log(colArr)
   return (
     <div className="task_Column">
       {colArr?.map((element) => {
