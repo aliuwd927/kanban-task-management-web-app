@@ -234,8 +234,29 @@ https://upmostly.com/tutorials/build-a-react-switch-toggle-component
   justify-content: space-evenly;
 }
 
+.task_arr_Container{
+  width: 100%;
+  height: 100%;
+}
+
 .Todo_Container,.Doing_Container,.Done_Container{
   text-align: center ;
   width: 100%;
+  outline: red auto;
+}
+.task_Title_Container{
+ display: flex;
+ flex-direction: column;
+ gap:2rem;
+}
+.inner_Task_Column_Container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+.task_Title{
+  width: 280px;
+  height: 80px;
   outline: auto;
 }
