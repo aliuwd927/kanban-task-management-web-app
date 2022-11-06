@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import KanbanInfo from "../../kanbanContextProvider";
+import TaskComponent from "./TaskComponent";
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
   const boardArr = state?.storeData?.boards;
@@ -35,10 +36,6 @@ export default function BoardInfoComponent() {
   //   return element
   // })
   
-  const test = state?.columnArr?.tasks
-
-  console.log(test)
-
 
  
   return (
@@ -49,6 +46,7 @@ export default function BoardInfoComponent() {
           <div></div>
         )
       })} */}
+      <TaskComponent/>
     </div>
   );
 }
