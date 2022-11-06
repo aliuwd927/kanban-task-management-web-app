@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import "./App.css";
 import KanbanInfo from "./kanbanContextProvider";
-import { Root } from "./components/TS Interface JSON/starterInterface";
+import { Board, Column, Root } from "./components/TS Interface JSON/starterInterface";
 import { ActionType } from "./components/TS Interface JSON/actionInterface";
 import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
@@ -12,6 +12,7 @@ import SideBarComponent from "./components/sidebar/SideBarComponent";
 const initalState: Inital = {
   storeData: {} as Root,
   boardName: "",
+  columnArr: {} as Column,
 };
 
 const reducer = (state: Inital, action: ActionType) => {
@@ -20,6 +21,8 @@ const reducer = (state: Inital, action: ActionType) => {
       return { ...state, storeData: action.data };
     case "STORETEXT":
       return { ...state, boardName: action.boardValue };
+    case "STORECOLUMNARRAY":
+      return {...state, columnArr: action.colArr}
     default:
       return state;
   }
