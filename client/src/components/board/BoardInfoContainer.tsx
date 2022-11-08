@@ -3,7 +3,6 @@ import KanbanInfo from "../../kanbanContextProvider";
 import TaskComponent from "./TaskComponent";
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
-  const boardArr = state?.storeData?.boards;
 
   //Testing Things
   // boardArr?.map((element) => {
@@ -35,24 +34,16 @@ export default function BoardInfoComponent() {
   // let test = colArr?.map((element)=>{
   //   return element
   // })
-  
 
- 
   return (
     <div className="task_Column">
-      {/* {colArr?.map((element)=>{
-        console.log()
-        return(
-          <div></div>
-        )
-      })} */}
-      <TaskComponent/>
+      <TaskComponent />
     </div>
   );
 }
 
-
-{/*
+{
+  /*
   Notes:
     * On page load, local json file, loads directly into state, and live in state.board
   
@@ -60,11 +51,13 @@ export default function BoardInfoComponent() {
 
 
   
-*/}
+*/
+}
 
 // Reset Code
 
-{/*
+{
+  /*
 
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
@@ -136,4 +129,5 @@ export default function BoardInfoComponent() {
   );
 }
 
-*/}
+*/
+}

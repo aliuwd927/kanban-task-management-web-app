@@ -239,7 +239,7 @@ https://upmostly.com/tutorials/build-a-react-switch-toggle-component
   height: 100%;
 }
 
-.Todo_Container,.Doing_Container,.Done_Container{
+.status_Name_Container{
   text-align: center ;
   width: 100%;
   outline: red auto;
