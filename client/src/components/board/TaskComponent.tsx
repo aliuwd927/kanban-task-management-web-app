@@ -20,7 +20,7 @@ export default function TaskComponent() {
       return (
       <div className="task_Title">
         {element.title}
-        <div>{subTasks}</div>
+        <div>{subTasks} subtasks</div>
         </div>
       );
     });
