@@ -72,4 +72,6 @@ Drag and Drop Components
               i think you can do what you were doing, but use a foreach, for of, reduce, etc instead of the inner map
               basically use a different way of iterating in order to calculate the isCompletedCount
 
+              !!!a better method of breaking the problem into components will need to be thought of, but you will figure these things out!!!
+
 */}
