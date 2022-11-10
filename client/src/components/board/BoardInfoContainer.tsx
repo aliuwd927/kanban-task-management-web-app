@@ -4,13 +4,6 @@ import TaskComponent from "./TaskComponent";
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
 
-  //Testing Things
-  // boardArr?.map((element) => {
-  //   if (state.boardName === element.name) {
-  //     //console.log(element.columns);
-  //   }
-  // });
-
   /*
 
   ad0ran: its like the || but only against undefined/null values
@@ -19,21 +12,6 @@ export default function BoardInfoComponent() {
 
   */
 
-  // let [colArr] =
-  //   boardArr
-  //     ?.filter((element) => element.name === state.boardName)
-  //     .map((element) => {
-  //       const coltaskArr = element?.columns;
-  //       // const colTask = coltaskArr?.map((tasks) => {
-  //       //   // console.log(tasks);
-  //       //   return tasks?.name;
-  //       // });
-  //       return [element?.columns];
-  //     }) ?? [];
-
-  // let test = colArr?.map((element)=>{
-  //   return element
-  // })
 
   return (
     <div className="task_Column">
@@ -42,17 +20,6 @@ export default function BoardInfoComponent() {
   );
 }
 
-{
-  /*
-  Notes:
-    * On page load, local json file, loads directly into state, and live in state.board
-  
-
-
-
-  
-*/
-}
 
 // Reset Code
 

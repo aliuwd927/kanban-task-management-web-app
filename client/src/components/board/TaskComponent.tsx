@@ -17,6 +17,30 @@ export default function TaskComponent() {
   let displayTaskArray = colArr?.map((element) => {
     let taskArray = element?.tasks?.map((element) => {
       let subTasks = element?.subtasks?.length;
+      let countTrue = 0;
+      let countFalse = 0;
+      let isCompletedCount = element?.subtasks.map((element)=>{
+        element?.isCompleted === true ? countTrue++ : countFalse++
+
+        //we can use isCompleted to return our values...but how...
+      })
+
+{/*
+
+SubTask Logic
+
+Todo: if false > true todo = todo
+
+Doing: if true > false && false !== 0 = doing
+
+Done: if true > false && false === 0 = done
+
+*/}
+
+
+      console.log(`${isCompletedCount}`)
+      //console.log(`True:${countTrue}, False:${countFalse}`)
+      
       return (
       <div className="task_Title">
         {element.title}
@@ -35,3 +59,10 @@ export default function TaskComponent() {
   return <div className="task_Column">{displayTaskArray}</div>;
 }
 
+{/*
+
+https://dndkit.com/
+
+Drag and Drop Components
+
+*/}

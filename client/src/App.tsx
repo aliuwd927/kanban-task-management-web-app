@@ -7,7 +7,7 @@ import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
 import TaskContainer from "./components/header/TaskContainer";
 import SideBarComponent from "./components/sidebar/SideBarComponent";
-//Also make sure implement ZOD
+//Also make sure implement ZOD for input validation
 
 const initalState: Inital = {
   storeData: {} as Root,
