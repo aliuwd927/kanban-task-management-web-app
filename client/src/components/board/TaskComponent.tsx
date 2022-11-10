@@ -13,18 +13,6 @@ export default function TaskComponent() {
       }) ?? [];
 
 
-
-  let displayTaskArray = colArr?.map((element) => {
-    let taskArray = element?.tasks?.map((element) => {
-      let subTasks = element?.subtasks?.length;
-      let countTrue = 0;
-      let countFalse = 0;
-      let isCompletedCount = element?.subtasks.map((element)=>{
-        element?.isCompleted === true ? countTrue++ : countFalse++
-
-        //we can use isCompleted to return our values...but how...
-      })
-
 {/*
 
 SubTask Logic
@@ -37,6 +25,17 @@ Done: if true > false && false === 0 = done
 
 */}
 
+
+  let displayTaskArray = colArr?.map((element) => {
+    let taskArray = element?.tasks?.map((element) => {
+      let subTasks = element?.subtasks?.length;
+      let countTrue = 0;
+      let countFalse = 0;
+      let isCompletedCount = element?.subtasks.map((element)=>{
+        element?.isCompleted === true ? countTrue++ : countFalse++
+
+        //we can use isCompleted to return our values...but how...
+      })
 
       console.log(`${isCompletedCount}`)
       //console.log(`True:${countTrue}, False:${countFalse}`)
@@ -64,5 +63,13 @@ Done: if true > false && false === 0 = done
 https://dndkit.com/
 
 Drag and Drop Components
+
+*/}
+
+
+{/*
+    micheaaa: now that i have a better idea of what you are trying to do. 
+              i think you can do what you were doing, but use a foreach, for of, reduce, etc instead of the inner map
+              basically use a different way of iterating in order to calculate the isCompletedCount
 
 */}
