@@ -38,12 +38,14 @@ Done: if true > false && false === 0 = done
       })
 
       console.log(`${isCompletedCount}`)
+      
       //console.log(`True:${countTrue}, False:${countFalse}`)
       
       return (
       <div className="task_Title">
         {element.title}
-        <div>{subTasks} subtasks</div>
+        <div>{`${countFalse > countTrue ? 0 : countTrue} of ${subTasks} SubTask`}</div>
+        {/* <div>{`${countTrue}${countFalse}${subTasks} SubTask`}</div> */}
         </div>
       );
     });
