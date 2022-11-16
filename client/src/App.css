@@ -44,6 +44,7 @@
   gap: 24px;
   max-width: 192px;
   width: 100%;
+  flex-direction: column;
 }
 
 .theme_Container{
@@ -258,5 +259,33 @@ https://upmostly.com/tutorials/build-a-react-switch-toggle-component
 .task_Title{
   width: 280px;
   height: 80px;
+  outline: auto;
+}
+
+.list_label_Container{
+  display: flex;
+  flex-direction: column;
+  outline: auto;
+  width: 35%;
+  z-index: 1;
+  position: absolute;
+  margin-top: 25%;
+}
+
+.list_label{
+
+}
+
+.add_Task_Container_Container{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 25%;
+outline:auto;
+position: relative;
+}
+
+.icon_Ellipsis_Container{
   outline: auto;
 }
