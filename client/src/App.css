@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+
+
 .App {
   display: flex;
   flex-direction: row;
@@ -287,5 +289,27 @@ position: relative;
 }
 
 .icon_Ellipsis_Container{
+  outline: auto;
+}
+
+.modal_Container{
+  width: 100%;
+  height: 110%;
+  background-color: rgb(145, 145, 145);
+  opacity: 85%;
+  outline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal_Container_Dialog_Panel{
   outline: auto;
 }

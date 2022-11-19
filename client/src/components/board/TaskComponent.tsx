@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { MouseEvent,useContext, useState } from "react";
+import { Dialog } from "@headlessui/react";
 import KanbanInfo from "../../kanbanContextProvider";
+import TestModal from "./modal";
+
 
 export default function TaskComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
+  const [isOpen, setIsOpen] = useState(true);
   const boardArr = state?.storeData?.boards;
 
   let [colArr] =
@@ -12,18 +16,12 @@ export default function TaskComponent() {
         return element?.columns;
       }) ?? [];
 
-
-{/*
-
-SubTask Logic
-
-Todo: if false > true todo = todo
-
-Doing: if true > false && false !== 0 = doing
-
-Done: if true > false && false === 0 = done
-
-*/}
+  function changeModalStatus(){
+    //based on onClick this will change
+    //set State
+    //isOpen will be changed to either T / F
+    setIsOpen(!isOpen)
+  }
 
 
   let displayTaskArray = colArr?.map((element) => {
@@ -33,19 +31,14 @@ Done: if true > false && false === 0 = done
       let countFalse = 0;
       let isCompletedCount = element?.subtasks.map((element)=>{
         element?.isCompleted === true ? countTrue++ : countFalse++
-
         //we can use isCompleted to return our values...but how...
       })
-
-      console.log(`${isCompletedCount}`)
-      
+      // console.log(`${isCompletedCount}`)
       //console.log(`True:${countTrue}, False:${countFalse}`)
-      
       return (
-      <div className="task_Title">
+      <div className="task_Title" onClick={changeModalStatus}>
         {element.title}
         <div>{`${countFalse > countTrue ? 0 : countTrue} of ${subTasks} SubTask`}</div>
-        {/* <div>{`${countTrue}${countFalse}${subTasks} SubTask`}</div> */}
         </div>
       );
     });
@@ -57,7 +50,11 @@ Done: if true > false && false === 0 = done
     );
   });
 
-  return <div className="task_Column">{displayTaskArray}</div>;
+  return (
+  <div className="task_Column">
+    {displayTaskArray}
+    <TestModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+    </div>);
 }
 
 {/*
@@ -75,5 +72,19 @@ Drag and Drop Components
               basically use a different way of iterating in order to calculate the isCompletedCount
 
               !!!a better method of breaking the problem into components will need to be thought of, but you will figure these things out!!!
+
+*/}
+
+
+
+{/*
+
+SubTask Logic
+
+Todo: if false > true todo = todo
+
+Doing: if true > false && false !== 0 = doing
+
+Done: if true > false && false === 0 = done
 
 */}
