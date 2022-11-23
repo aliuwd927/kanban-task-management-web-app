@@ -15,3 +15,7 @@ export default function SlideToggle(){
         </Switch>
     )
 }
+
+
+//Use This as Hint??
+//https://www.w3schools.com/howto/howto_css_switch.asp
