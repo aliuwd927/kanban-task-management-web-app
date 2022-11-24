@@ -46,3 +46,17 @@ export default function SlideToggle() {
  * height: 1rem;
  * border-radius: 9999px;
  */
+
+/**
+ *
+ *
+ * const something = () => ()
+ *
+ * returns content
+ *
+ * similar to => function something(){
+ *  return()
+ * }
+ *
+ *
+ */
