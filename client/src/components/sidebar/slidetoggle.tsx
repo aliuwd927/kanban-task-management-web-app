@@ -3,8 +3,6 @@ import { Switch } from "@headlessui/react";
 
 export default function SlideToggle() {
   const [enabled, setEnabled] = useState(false);
-  let backgroundGray = { backgroundColor: "#2563EB" };
-  let backgrounBlue = { backgroundColor: "#E5E7EB" };
   let transFormRemOneHalf = { transform: "translateX(1rem)" };
 
   return (
@@ -13,7 +11,7 @@ export default function SlideToggle() {
         <button
           title="toggle_theme_switch"
           className="toggle_theme_switch_Container"
-          style={checked ? backgroundGray : backgrounBlue}
+          style={{ backgroundColor: "#635FC7" }}
         >
           <span
             className={"toggle_theme_switch_button"}
