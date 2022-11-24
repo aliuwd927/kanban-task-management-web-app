@@ -1,12 +1,10 @@
-import { MouseEvent,useContext, useState } from "react";
-import { Dialog } from "@headlessui/react";
+import { useContext, useState } from "react";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
 
-
 export default function TaskComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const boardArr = state?.storeData?.boards;
 
   let [colArr] =
@@ -16,29 +14,28 @@ export default function TaskComponent() {
         return element?.columns;
       }) ?? [];
 
-  function changeModalStatus(){
+  function changeModalStatus() {
     //based on onClick this will change
     //set State
     //isOpen will be changed to either T / F
-    setIsOpen(!isOpen)
+    setIsOpen(!isOpen);
   }
 
-
   let displayTaskArray = colArr?.map((element) => {
+    console.log(colArr);
     let taskArray = element?.tasks?.map((element) => {
       let subTasks = element?.subtasks?.length;
-      let countTrue = 0;
-      let countFalse = 0;
-      let isCompletedCount = element?.subtasks.map((element)=>{
-        element?.isCompleted === true ? countTrue++ : countFalse++
-        //we can use isCompleted to return our values...but how...
-      })
-      // console.log(`${isCompletedCount}`)
-      //console.log(`True:${countTrue}, False:${countFalse}`)
+      let isCompletedCount = element?.subtasks.filter((element) => {
+        return element.isCompleted;
+      }).length;
+      let notCompletedCount = element?.subtasks.filter((element) => {
+        return !element.isCompleted;
+      }).length;
+      //If item === todo, then 0? else not 0?
       return (
-      <div className="task_Title" onClick={changeModalStatus}>
-        {element.title}
-        <div>{`${countFalse > countTrue ? 0 : countTrue} of ${subTasks} SubTask`}</div>
+        <div className="task_Title" onClick={changeModalStatus}>
+          {element.title}
+          <div>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
         </div>
       );
     });
@@ -51,33 +48,36 @@ export default function TaskComponent() {
   });
 
   return (
-  <div className="task_Column">
-    {displayTaskArray}
-    <TestModal isOpen={isOpen} setIsOpen={setIsOpen}/>
-    </div>);
+    <div className="task_Column">
+      <>{displayTaskArray}</>
+      <TestModal isOpen={isOpen} setIsOpen={setIsOpen} />
+    </div>
+  );
 }
 
-{/*
+{
+  /*
 
 https://dndkit.com/
 
 Drag and Drop Components
 
-*/}
+*/
+}
 
-
-{/*
+{
+  /*
     micheaaa: now that i have a better idea of what you are trying to do. 
               i think you can do what you were doing, but use a foreach, for of, reduce, etc instead of the inner map
               basically use a different way of iterating in order to calculate the isCompletedCount
 
               !!!a better method of breaking the problem into components will need to be thought of, but you will figure these things out!!!
 
-*/}
+*/
+}
 
-
-
-{/*
+{
+  /*
 
 SubTask Logic
 
@@ -87,4 +87,22 @@ Doing: if true > false && false !== 0 = doing
 
 Done: if true > false && false === 0 = done
 
-*/}
+*/
+}
+
+// Code Reset
+
+{
+  /**
+ * 
+ * 
+      let isCompletedCount = element?.subtasks.filter((element) => {
+        return element.isCompleted;
+      });
+      let notCompletedCount = element?.subtasks.filter((element) => {
+        return !element.isCompleted;
+      });
+      console.log("Completed", isCompletedCount);
+      console.log("Not Completed", notCompletedCount);
+ */
+}
