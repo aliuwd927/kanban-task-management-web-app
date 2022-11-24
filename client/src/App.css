@@ -182,49 +182,6 @@
 }
 /* Add Task Button*/
 
-
-/* Slide Toggle */
-
-.slide_Toggle {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.switch_Label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  width: 40px;
-  height: 20px;
-  background: #635FC7;
-  border-radius: 100px;
-  position: relative;
-  transition: background-color .2s;
-}
-
-.switch_Label .switch_Button {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 15px;
-  height: 15px;
-  border-radius: 45px;
-  transition: 0.2s;
-  background: #fff;
-  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-}
-
-.slide_Toggle:checked + .switch_Label .switch_Button {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
-}
-
-
-/* End Slide Toggle */
-
 /*
 https://upmostly.com/tutorials/build-a-react-switch-toggle-component
 */
@@ -313,3 +270,36 @@ position: relative;
 .modal_Container_Dialog_Panel{
   outline: auto;
 }
+
+
+/* 
+
+Slider Toggle Begin
+
+*/
+
+.toggle_theme_switch_Container{
+  height: 1.5rem;
+  width: 2.75rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+}
+
+.toggle_theme_switch_button{
+  display: inline-block;
+  background-color: #ffffff;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+}
+
+/* 
+
+Slider Toggle End
+
+*/

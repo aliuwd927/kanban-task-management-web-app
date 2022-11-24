@@ -1,17 +1,50 @@
-import {Switch} from '@headlessui/react';
-import { useState } from 'react';
+import { useState, Fragment } from "react";
+import { Switch } from "@headlessui/react";
 
-export default function SlideToggle(){
-    const [enabled, setEnabled] = useState(false)
-    return(
-        <Switch
-            checked={enabled}
-            onChange={setEnabled}
-            className = {`${enabled} ? 'bg-blue-600': 'bg-gray-200'`}
-            
+export default function SlideToggle() {
+  const [enabled, setEnabled] = useState(false);
+  let backgroundGray = { backgroundColor: "#2563EB" };
+  let backgrounBlue = { backgroundColor: "#E5E7EB" };
+  let transFormRemOneHalf = { transform: "translateX(1rem)" };
+
+  return (
+    <Switch checked={enabled} onChange={setEnabled} as={Fragment}>
+      {({ checked }) => (
+        <button
+          title="toggle_theme_switch"
+          className="toggle_theme_switch_Container"
+          style={checked ? backgroundGray : backgrounBlue}
         >
-            <span className='sr-only'></span>
-            <span className = {`${enabled} ? 'bg-blue-600': 'bg-gray-200'`}></span>
-        </Switch>
-    )
+          <span
+            className={"toggle_theme_switch_button"}
+            style={checked ? transFormRemOneHalf : {}}
+          />
+        </button>
+      )}
+    </Switch>
+  );
 }
+
+/**
+ * This item holds true no matter what
+ * h-6 => height: 1.5rem;
+ * w-11 => width: 2.75rem;
+ * relative => position: relative;
+ * inline flex => display: inline-flex;
+ * items-center => align-items: center;
+ * rounded-full => border-radius: 9999px;
+ *
+ * translate-x-6 => --transform-translate-x: 1.5rem;
+ * translate-x-1 => --transform-translate-x: 0.25rem;
+ * inline-block => display: inline-block;
+ * h-4 => height: 1rem;
+ * w-4 => width: 1rem;
+ * rounded-full => border-radius: 9999px;
+ *
+ * display: inline-block;
+ * background-color: #ffffff;
+ * transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+ * width: 1rem;
+ * height: 1rem;
+ * border-radius: 9999px;
+ */
