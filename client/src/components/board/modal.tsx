@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Dialog } from '@headlessui/react'
+import KanbanInfo from '../../kanbanContextProvider'
 
 export interface ModalProps{
     isOpen: boolean,
@@ -7,22 +8,19 @@ export interface ModalProps{
 }
 
 export default function TestModal(props:ModalProps){
-   
-
-   console.log(`TaskComponent: ${props.isOpen}`)
-
+    const [state,dispatch] = useContext(KanbanInfo)!
+    console.log(state.modalTaskArr)
     return(
         <Dialog open={props.isOpen} onClose={()=>props.setIsOpen(props.isOpen)} className="modal_Container">
             <div className='modal_Container_Dialog_Panel'>
             <Dialog.Panel>
-                <Dialog.Title>Hello World Title</Dialog.Title>
+                <Dialog.Title>{state.modalTaskArr.title}</Dialog.Title>
                     <Dialog.Description>
-                        Hello World
+                        {state.modalTaskArr.description}
                     </Dialog.Description>
                     <button onClick={()=>props.setIsOpen(!props.isOpen)}>Close</button>
             </Dialog.Panel>
-            </div>
-            
+            </div>  
         </Dialog>
     )
 }

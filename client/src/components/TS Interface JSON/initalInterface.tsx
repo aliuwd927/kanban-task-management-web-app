@@ -1,7 +1,7 @@
-import { Root, Column, Board } from "./starterInterface";
+import { Root, Task, Board } from "./starterInterface";
 
 export interface Inital {
   storeData: Root;
   boardName: string;
-  columnArr: Column;
+  modalTaskArr: Task;
 }

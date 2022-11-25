@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
+import { Task } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
+import { ActionType } from "../TS Interface JSON/actionInterface";
 
 export default function TaskComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
@@ -21,8 +23,21 @@ export default function TaskComponent() {
     setIsOpen(!isOpen);
   }
 
+  function storeGModalArr(elementItems:Task){
+    let action: ActionType = {type: 'STOREMODALARRAY', elementItems}
+    dispatch(action)
+  }
+
+  /**
+   * 
+   * onClick --> Done
+   * take element from what we clicked --> Done
+   * store it to globalContext ( avoid prop drilling ) --> Done
+   * render from globalContext to our modal
+   * update TS for modalTaskArr --> Done
+   */
+
   let displayTaskArray = colArr?.map((element) => {
-    console.log(colArr);
     let taskArray = element?.tasks?.map((element) => {
       let subTasks = element?.subtasks?.length;
       let isCompletedCount = element?.subtasks.filter((element) => {
@@ -32,8 +47,13 @@ export default function TaskComponent() {
         return !element.isCompleted;
       }).length;
       //If item === todo, then 0? else not 0?
+
+      
       return (
-        <div className="task_Title" onClick={changeModalStatus}>
+        <div className="task_Title" onClick={()=>{
+          changeModalStatus()
+          storeGModalArr(element)
+          }}>
           {element.title}
           <div>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
         </div>

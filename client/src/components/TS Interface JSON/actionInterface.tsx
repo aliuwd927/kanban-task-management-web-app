@@ -1,7 +1,6 @@
-
-import { Root,Column, Board } from "./starterInterface";
+import { Root,Task, Board } from "./starterInterface";
 
 export type ActionType =
   | { type: "STOREAPI"; data: Root }
   | { type: "STORETEXT"; boardValue: string }// Figure this out later, number,string, string[] || number []??
-  | { type: "STORECOLUMNARRAY"; colArr: Column}
+  | { type: "STOREMODALARRAY"; elementItems: Task}
