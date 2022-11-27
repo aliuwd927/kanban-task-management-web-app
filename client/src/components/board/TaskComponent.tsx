@@ -23,13 +23,13 @@ export default function TaskComponent() {
     setIsOpen(!isOpen);
   }
 
-  function storeGModalArr(elementItems:Task){
-    let action: ActionType = {type: 'STOREMODALARRAY', elementItems}
-    dispatch(action)
+  function storeGModalArr(elementItems: Task) {
+    let action: ActionType = { type: "STOREMODALARRAY", elementItems };
+    dispatch(action);
   }
 
   /**
-   * 
+   *
    * onClick --> Done
    * take element from what we clicked --> Done
    * store it to globalContext ( avoid prop drilling ) --> Done
@@ -38,22 +38,21 @@ export default function TaskComponent() {
    */
 
   let displayTaskArray = colArr?.map((element) => {
-    let taskArray = element?.tasks?.map((element) => {
+    let taskArray = element?.tasks?.map((element, index) => {
       let subTasks = element?.subtasks?.length;
       let isCompletedCount = element?.subtasks.filter((element) => {
         return element.isCompleted;
       }).length;
-      let notCompletedCount = element?.subtasks.filter((element) => {
-        return !element.isCompleted;
-      }).length;
-      //If item === todo, then 0? else not 0?
 
-      
       return (
-        <div className="task_Title" onClick={()=>{
-          changeModalStatus()
-          storeGModalArr(element)
-          }}>
+        <div
+          className="task_Title"
+          onClick={() => {
+            changeModalStatus();
+            storeGModalArr(element);
+          }}
+          key={index}
+        >
           {element.title}
           <div>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
         </div>

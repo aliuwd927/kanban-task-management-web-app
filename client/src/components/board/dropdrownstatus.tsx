@@ -8,9 +8,9 @@ export default function DropDownStatus() {
     state?.storeData?.boards
       ?.filter((element) => element?.name === state?.boardName)
       .map((element) => {
-        return element?.columns?.map((element) => {
+        return element?.columns?.map((element, index) => {
           if (element?.name !== state?.modalTaskArr?.status) {
-            return <div>{element?.name}</div>;
+            return <div key={index}>{element?.name}</div>;
           }
         });
       }) ?? [];

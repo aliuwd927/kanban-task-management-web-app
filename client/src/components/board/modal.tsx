@@ -11,10 +11,14 @@ export interface ModalProps {
 export default function TestModal(props: ModalProps) {
   const [state, dispatch] = useContext(KanbanInfo)!;
 
-  let subTaskTitles = state.modalTaskArr.subtasks.map((element) => {
+  let subTaskTitles = state?.modalTaskArr?.subtasks?.map((element, index) => {
     return (
-      <div>
-        <input type="checkbox" aria-label={element?.title} />
+      <div key={index}>
+        <input
+          type="checkbox"
+          aria-label={element?.title}
+          defaultChecked={element?.isCompleted}
+        />
         <label htmlFor="">{element?.title}</label>
       </div>
     );
