@@ -3,7 +3,7 @@ import KanbanInfo from "../../kanbanContextProvider";
 import { Menu } from "@headlessui/react";
 export default function DropDownStatus() {
   const [state, dispatch] = useContext(KanbanInfo)!;
-  console.log(state.modalTaskArr);
+
   let statusArr =
     state?.storeData?.boards
       ?.filter((element) => element?.name === state?.boardName)

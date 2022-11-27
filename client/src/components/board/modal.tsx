@@ -10,6 +10,15 @@ export interface ModalProps {
 
 export default function TestModal(props: ModalProps) {
   const [state, dispatch] = useContext(KanbanInfo)!;
+
+  let subTaskTitles = state.modalTaskArr.subtasks.map((element) => {
+    return (
+      <div>
+        <input type="checkbox" />
+        <label htmlFor="">{element?.title}</label>
+      </div>
+    );
+  });
   return (
     <Dialog
       open={props.isOpen}
@@ -22,6 +31,7 @@ export default function TestModal(props: ModalProps) {
           <Dialog.Description>
             {state.modalTaskArr.description}
           </Dialog.Description>
+          {subTaskTitles}
           <button onClick={() => props.setIsOpen(!props.isOpen)}>Close</button>
           <DropDownStatus />
         </Dialog.Panel>
