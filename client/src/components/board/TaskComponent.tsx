@@ -54,7 +54,7 @@ export default function TaskComponent() {
           key={index}
         >
           {element.title}
-          <div>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
+          <div key={index}>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
         </div>
       );
     });

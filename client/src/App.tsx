@@ -1,7 +1,11 @@
 import { useEffect, useReducer } from "react";
 import "./App.css";
 import KanbanInfo from "./kanbanContextProvider";
-import { Board, Task, Root } from "./components/TS Interface JSON/starterInterface";
+import {
+  Board,
+  Task,
+  Root,
+} from "./components/TS Interface JSON/starterInterface";
 import { ActionType } from "./components/TS Interface JSON/actionInterface";
 import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
@@ -22,12 +26,19 @@ const reducer = (state: Inital, action: ActionType) => {
     case "STORETEXT":
       return { ...state, boardName: action.boardValue };
     case "STOREMODALARRAY":
-      return {...state, modalTaskArr: action.elementItems}
+      return { ...state, modalTaskArr: action.elementItems };
     default:
       return state;
   }
 };
-
+/**
+ *
+ * Onload, useEffect will get the local json file
+ * It will be stored directly into our useContext
+ * state.store.data.boards is how we are referencing out stored data on load
+ * we can then modify and update as we wish, without affect the json file locally
+ *
+ */
 function App() {
   const [state, dispatch] = useReducer(reducer, initalState);
   useEffect(() => {
