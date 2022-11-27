@@ -14,7 +14,7 @@ export default function TestModal(props: ModalProps) {
   let subTaskTitles = state.modalTaskArr.subtasks.map((element) => {
     return (
       <div>
-        <input type="checkbox" />
+        <input type="checkbox" aria-label={element?.title} />
         <label htmlFor="">{element?.title}</label>
       </div>
     );
