@@ -9,8 +9,8 @@ export default function MenuAddTask() {
         <Menu.Button className="add_Task">Add New Task</Menu.Button>
 
         <Menu.Items className="list_label_Container">
-          {links.map((link) => (
-            <Menu.Item as="div" className="list_label">
+          {links.map((link, index) => (
+            <Menu.Item as="div" className="list_label" key={index}>
               {link.label}
             </Menu.Item>
           ))}
