@@ -1,11 +1,7 @@
 import { useEffect, useReducer } from "react";
 import "./App.css";
 import KanbanInfo from "./kanbanContextProvider";
-import {
-  Board,
-  Task,
-  Root,
-} from "./components/TS Interface JSON/starterInterface";
+import { Task, Root } from "./components/TS Interface JSON/starterInterface";
 import { ActionType } from "./components/TS Interface JSON/actionInterface";
 import { Inital } from "./components/TS Interface JSON/initalInterface";
 import HeaderTask from "./components/header/Header";
