@@ -31,13 +31,24 @@ function SubTaskComponent({
     return calcuateCompleteSubTask(data.subtasks);
   }, [data.subtasks]);
 
-  console.log(isCompletedCount);
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.SUBTASK,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
   return (
     <div
       className="task_Title"
       onDoubleClick={() => {
         changeModalStatus();
         storeGModalArr(data);
+      }}
+      ref={drag}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: "move",
       }}
     >
       {data.title}
@@ -49,12 +60,7 @@ function SubTaskComponent({
 export default function TaskComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
   const [isOpen, setIsOpen] = useState(false);
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.SUBTASK,
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+
   const boardArr = state?.storeData?.boards;
 
   const board = boardArr?.find(
