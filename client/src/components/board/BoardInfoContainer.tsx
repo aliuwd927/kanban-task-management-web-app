@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import KanbanInfo from "../../kanbanContextProvider";
 import TaskComponent from "./TaskComponent";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 export default function BoardInfoComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
 
@@ -12,14 +15,14 @@ export default function BoardInfoComponent() {
 
   */
 
-
   return (
-    <div className="task_Column">
-      <TaskComponent />
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div className="task_Column">
+        <TaskComponent />
+      </div>
+    </DndProvider>
   );
 }
-
 
 // Reset Code
 

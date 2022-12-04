@@ -199,6 +199,13 @@ https://upmostly.com/tutorials/build-a-react-switch-toggle-component
   height: 100%;
 }
 
+.subTask_Container{
+  height: 100%;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
 .status_Name_Container{
   text-align: center ;
   width: 100%;
