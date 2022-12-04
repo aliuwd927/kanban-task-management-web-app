@@ -1,9 +1,9 @@
-import React, { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { Task } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
 import { ActionType } from "../TS Interface JSON/actionInterface";
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./Contstants";
 
 export interface TaskProps {
@@ -67,6 +67,10 @@ export default function TaskComponent() {
     (element) => element?.name === state?.boardName
   )?.columns;
 
+  console.log(state?.storeData);
+
+  // const moveSubTask = useCallback(() => {});
+
   function changeModalStatus() {
     //based on onClick this will change
     //set State
@@ -113,57 +117,31 @@ export default function TaskComponent() {
   );
 }
 
-{
-  /*
-
-https://dndkit.com/
-
-Drag and Drop Components
-
-*/
-}
+//https://gist.github.com/micheaaa/caed38d2125177900bee080a2244587d
+//Refactor code.
 
 {
   /*
-    micheaaa: now that i have a better idea of what you are trying to do. 
-              i think you can do what you were doing, but use a foreach, for of, reduce, etc instead of the inner map
-              basically use a different way of iterating in order to calculate the isCompletedCount
+   
+  We Need to Track out element
 
-              !!!a better method of breaking the problem into components will need to be thought of, but you will figure these things out!!!
+  We need to grab columns
 
-*/
+  Each column will be tracked
+
+
+
+   */
 }
-
-{
-  /*
-
-SubTask Logic
-
-Todo: if false > true todo = todo
-
-Doing: if true > false && false !== 0 = doing
-
-Done: if true > false && false === 0 = done
-
-*/
-}
-
-// Code Reset
 
 {
   /**
- * 
- * 
-      let isCompletedCount = element?.subtasks.filter((element) => {
-        return element.isCompleted;
-      });
-      let notCompletedCount = element?.subtasks.filter((element) => {
-        return !element.isCompleted;
-      });
-      console.log("Completed", isCompletedCount);
-      console.log("Not Completed", notCompletedCount);
- */
+   * 
+   * micheaaa: One way to do this: you can implement dispatch({type: 'MOVE_TASK', 
+   *                                                           data: {from: {column, index}, 
+   *                                                           to: {column, index}}}). 
+   * This action will remove the element in (from.column) at index (from.index) and move it to (to.column) at index (to.index)
+   * 
+      micheaaa: using the from and to, you can change the board
+   */
 }
-
-//https://gist.github.com/micheaaa/caed38d2125177900bee080a2244587d
-//Refactor code.
