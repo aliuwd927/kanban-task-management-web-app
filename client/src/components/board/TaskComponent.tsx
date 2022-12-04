@@ -1,10 +1,50 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Task } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
 import { ActionType } from "../TS Interface JSON/actionInterface";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./Contstants";
+
+export interface TaskProps {
+  data: Task;
+  changeModalStatus: () => void;
+  storeGModalArr: (elementItems: Task) => void;
+}
+
+function calcuateCompleteSubTask(subtasks: Task["subtasks"]) {
+  let count = 0;
+  subtasks.forEach((task) => {
+    if (task.isCompleted) {
+      count++;
+    }
+  });
+  return count;
+}
+
+function SubTaskComponent({
+  data,
+  changeModalStatus,
+  storeGModalArr,
+}: TaskProps) {
+  const isCompletedCount = useMemo(() => {
+    return calcuateCompleteSubTask(data.subtasks);
+  }, [data.subtasks]);
+
+  console.log(isCompletedCount);
+  return (
+    <div
+      className="task_Title"
+      onDoubleClick={() => {
+        changeModalStatus();
+        storeGModalArr(data);
+      }}
+    >
+      {data.title}
+      <div>{`${isCompletedCount} of ${data.subtasks.length} SubTask`}</div>
+    </div>
+  );
+}
 
 export default function TaskComponent() {
   const [state, dispatch] = useContext(KanbanInfo)!;
@@ -17,12 +57,9 @@ export default function TaskComponent() {
   }));
   const boardArr = state?.storeData?.boards;
 
-  let [colArr] =
-    boardArr
-      ?.filter((element) => element?.name === state?.boardName)
-      .map((element) => {
-        return element?.columns;
-      }) ?? [];
+  const board = boardArr?.find(
+    (element) => element?.name === state?.boardName
+  )?.columns;
 
   function changeModalStatus() {
     //based on onClick this will change
@@ -46,47 +83,25 @@ export default function TaskComponent() {
    * update TS for modalTaskArr --> Done
    */
 
-  let displayTaskArray = colArr?.map((element) => {
-    let taskArray = element?.tasks?.map((element, index) => {
-      let subTasks = element?.subtasks?.length;
-      let isCompletedCount = element?.subtasks.filter((element) => {
-        return element.isCompleted;
-      }).length;
-
-      return (
-        <div
-          key={index}
-          ref={drag}
-          style={{
-            opacity: isDragging ? 0.5 : 1,
-            cursor: "move",
-          }}
-        >
-          <div
-            className="task_Title"
-            onDoubleClick={() => {
-              changeModalStatus();
-              storeGModalArr(element);
-            }}
-          >
-            {element.title}
-            <div>{`${isCompletedCount} of ${subTasks} SubTask`}</div>
-          </div>
-        </div>
-      );
-    });
-    return (
-      <div className="inner_Task_Column_Container">
-        <div className={`status_Name_Container`}>{element.name}</div>
-        <div className="subTask_Container">{taskArray}</div>
-      </div>
-    );
-  });
-
   return (
     <div className="task_Column">
-      <>{displayTaskArray}</>
-
+      {board?.map((column) => {
+        return (
+          <div key={column.name} className="inner_Task_Column_Container">
+            <div className={`status_Name_Container`}>{column.name}</div>
+            <div className="subTask_Container">
+              {column?.tasks.map((task) => (
+                <SubTaskComponent
+                  key={task.title}
+                  data={task}
+                  changeModalStatus={changeModalStatus}
+                  storeGModalArr={storeGModalArr}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
       <TestModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
