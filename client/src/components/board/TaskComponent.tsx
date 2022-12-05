@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import { Task } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
@@ -8,6 +8,7 @@ import { ItemTypes } from "./Contstants";
 
 export interface TaskProps {
   data: Task;
+  id: string;
   changeModalStatus: () => void;
   storeGModalArr: (elementItems: Task) => void;
 }
@@ -24,6 +25,7 @@ function calcuateCompleteSubTask(subtasks: Task["subtasks"]) {
 
 function SubTaskComponent({
   data,
+  id,
   changeModalStatus,
   storeGModalArr,
 }: TaskProps) {
@@ -33,8 +35,11 @@ function SubTaskComponent({
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.SUBTASK,
+    item: () => {
+      return { id };
+    },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
+      isDragging: !!monitor.isDragging(),
     }),
   }));
 
@@ -67,10 +72,6 @@ export default function TaskComponent() {
     (element) => element?.name === state?.boardName
   )?.columns;
 
-  console.log(state?.storeData);
-
-  // const moveSubTask = useCallback(() => {});
-
   function changeModalStatus() {
     //based on onClick this will change
     //set State
@@ -100,9 +101,10 @@ export default function TaskComponent() {
           <div key={column.name} className="inner_Task_Column_Container">
             <div className={`status_Name_Container`}>{column.name}</div>
             <div className="subTask_Container">
-              {column?.tasks.map((task) => (
+              {column?.tasks.map((task, index) => (
                 <SubTaskComponent
                   key={task.title}
+                  id={task.title}
                   data={task}
                   changeModalStatus={changeModalStatus}
                   storeGModalArr={storeGModalArr}
