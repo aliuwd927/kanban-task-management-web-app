@@ -1,4 +1,5 @@
-import { useCallback, useContext, useMemo, useRef, useState } from "react";
+import type { Identifier, XYCoord } from "dnd-core";
+import { useContext, useMemo, useRef, useState } from "react";
 import { Task } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
@@ -8,9 +9,11 @@ import { ItemTypes } from "./Contstants";
 
 export interface TaskProps {
   data: Task;
-  id: string;
+  // taskObj: Task;
+  index: number;
   changeModalStatus: () => void;
   storeGModalArr: (elementItems: Task) => void;
+  updateSubTask: (item: TaskProps) => void;
 }
 
 function calcuateCompleteSubTask(subtasks: Task["subtasks"]) {
@@ -25,24 +28,60 @@ function calcuateCompleteSubTask(subtasks: Task["subtasks"]) {
 
 function SubTaskComponent({
   data,
-  id,
+  // taskObj,
+  index,
   changeModalStatus,
   storeGModalArr,
+  updateSubTask,
 }: TaskProps) {
   const isCompletedCount = useMemo(() => {
     return calcuateCompleteSubTask(data.subtasks);
   }, [data.subtasks]);
-
+  const ref = useRef<HTMLDivElement>(null);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.SUBTASK,
     item: () => {
-      return { id };
+      // const { title, description, status, subtasks } = taskObj;
+      // return { title, description, status, subtasks };
+      return { index };
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
 
+  const [, drop] = useDrop(() => ({
+    accept: ItemTypes.SUBTASK,
+    drop: (index: TaskProps) => {
+      updateSubTask(index);
+    },
+    hover: (item: TaskProps, monitor) => {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+
+      const hoverBoundRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundRect.bottom - hoverBoundRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundRect.top;
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+
+      item.index = hoverIndex;
+    },
+  }));
+
+  drag(drop(ref));
   return (
     <div
       className="task_Title"
@@ -50,7 +89,7 @@ function SubTaskComponent({
         changeModalStatus();
         storeGModalArr(data);
       }}
-      ref={drag}
+      ref={ref}
       style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",
@@ -71,6 +110,17 @@ export default function TaskComponent() {
   const board = boardArr?.find(
     (element) => element?.name === state?.boardName
   )?.columns;
+
+  const updateSubTask = (item: TaskProps) => {
+    //Update State
+
+    //We can use status to match
+    console.log(item.index);
+
+    //Rtns a list of task based by item status
+
+    //Figure out how to rearrange items
+  };
 
   function changeModalStatus() {
     //based on onClick this will change
@@ -104,10 +154,12 @@ export default function TaskComponent() {
               {column?.tasks.map((task, index) => (
                 <SubTaskComponent
                   key={task.title}
-                  id={task.title}
+                  // taskObj={task}
+                  index={index}
                   data={task}
                   changeModalStatus={changeModalStatus}
                   storeGModalArr={storeGModalArr}
+                  updateSubTask={updateSubTask}
                 />
               ))}
             </div>
