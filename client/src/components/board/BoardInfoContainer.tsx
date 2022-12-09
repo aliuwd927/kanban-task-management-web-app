@@ -17,7 +17,7 @@ export default function BoardInfoComponent() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="task_Column">
+      <div className="task_Column_Container">
         <TaskComponent />
       </div>
     </DndProvider>
