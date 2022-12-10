@@ -3,9 +3,9 @@ import { Task, Column } from "../TS Interface JSON/starterInterface";
 import KanbanInfo from "../../kanbanContextProvider";
 import TestModal from "./modal";
 import { ActionType } from "../TS Interface JSON/actionInterface";
-import { useDrag, useDrop } from "react-dnd";
-import { TaskProps } from "./SubTaskComponent";
-import SubTaskComponent from "./SubTaskComponent";
+import { useDrop } from "react-dnd";
+import SubTaskComponent, { TaskPosition } from "./SubTaskComponent";
+import { ItemTypes } from "./Contstants";
 
 export interface TaskColumnProps {
   column: Column;
@@ -14,6 +14,18 @@ export interface TaskColumnProps {
 export default function TaskColumn({ column }: TaskColumnProps) {
   const [, dispatch] = useContext(KanbanInfo)!;
   const [isOpen, setIsOpen] = useState(false);
+
+  const[,drop] = useDrop(()=>({
+    accept: ItemTypes.SUBTASK,
+    drop:(item:TaskPosition,monitor)=>{
+      if(monitor.didDrop()) return;
+
+      const fromDrag = {column: item.column, index:item.index};
+      const toDrop = {column: column.name, index: column.tasks.length};
+
+      dispatch({type: "MOVETASK", subtask:{fromDrag,toDrop}})
+    }
+  }),[column])
 
   function changeModalStatus() {
     //based on onClick this will change
@@ -28,16 +40,7 @@ export default function TaskColumn({ column }: TaskColumnProps) {
     dispatch(action);
   }
 
-  const updateSubTask = (item: TaskProps) => {
-    //Update State
 
-    //We can use status to match
-    console.log(item.index);
-
-    //Rtns a list of task based by item status
-
-    //Figure out how to rearrange items
-  };
 
   /**
    *
@@ -60,7 +63,6 @@ export default function TaskColumn({ column }: TaskColumnProps) {
             data={task}
             changeModalStatus={changeModalStatus}
             storeGModalArr={storeGModalArr}
-            updateSubTask={updateSubTask}
           />
         ))}
       </div>

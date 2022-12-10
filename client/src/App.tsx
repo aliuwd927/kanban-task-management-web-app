@@ -23,6 +23,38 @@ const reducer = (state: Inital, action: ActionType) => {
       return { ...state, boardName: action.boardValue };
     case "STOREMODALARRAY":
       return { ...state, modalTaskArr: action.elementItems };
+    case "MOVETASK":
+      let dragged: Task | null = null;
+      const {fromDrag,toDrop} = action.subtask;
+
+      const boardArr = state?.storeData?.boards;
+
+      let board = boardArr?.find(
+        (element) => element?.name === state?.boardName
+      )?.columns.map((column)=>{
+        console.log(column)
+        if(column.name !== fromDrag.column) return column;
+
+        dragged = column.tasks[fromDrag.index]
+        const newTask = column.tasks.filter((element,index)=>index !== fromDrag.index);
+
+        return{...column, tasks: newTask}
+      });
+
+
+      board = boardArr?.find(
+        (element) => element?.name === state?.boardName
+      )?.columns.map((column)=>{
+        if(column.name !== toDrop.column) return column;
+
+        const newTask = [...column.tasks];
+        newTask.splice(toDrop.index,0,{...dragged!, status: toDrop.column});
+
+        return {...column, tasks: newTask}
+      })
+
+      return{...state, board};
+
     default:
       return state;
   }
