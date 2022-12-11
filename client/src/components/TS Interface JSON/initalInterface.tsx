@@ -1,4 +1,4 @@
-import { Root, Task, Board } from "./starterInterface";
+import { Root, Task } from "./starterInterface";
 
 export interface Inital {
   storeData: Root;

@@ -65,7 +65,7 @@ const reducer = (state: Inital, action: ActionType): Inital => {
         storeData: {
           boards: boardArr.map((board) => {
             if (board.name === state.boardName) {
-              return { ...board, columns: columns };
+              return { ...board, columns: columns! };
             } else {
               return board;
             }

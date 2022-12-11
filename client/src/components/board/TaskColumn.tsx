@@ -15,23 +15,25 @@ export default function TaskColumn({ column }: TaskColumnProps) {
   const [, dispatch] = useContext(KanbanInfo)!;
   const [isOpen, setIsOpen] = useState(false);
 
-  const[,drop] = useDrop(()=>({
-    accept: ItemTypes.SUBTASK,
-    drop:(item:TaskPosition,monitor)=>{
-      if(monitor.didDrop()) return;
+  const [, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.SUBTASK,
+      drop: (item: TaskPosition, monitor) => {
+        if (monitor.didDrop()) return;
 
-      const fromDrag = {column: item.column, index:item.index};
-      const toDrop = {column: column.name, index: column.tasks.length};
+        const fromDrag = { column: item.column, index: item.index };
+        const toDrop = { column: column.name, index: column.tasks.length };
 
-      dispatch({type: "MOVETASK", subtask:{fromDrag,toDrop}})
-    }
-  }),[column])
+        dispatch({ type: "MOVETASK", subtask: { fromDrag, toDrop } });
+      },
+    }),
+    [column]
+  );
 
   function changeModalStatus() {
     //based on onClick this will change
     //set State
     //isOpen will be changed to either T / F
-
     setIsOpen(!isOpen);
   }
 
@@ -39,8 +41,6 @@ export default function TaskColumn({ column }: TaskColumnProps) {
     let action: ActionType = { type: "STOREMODALARRAY", elementItems };
     dispatch(action);
   }
-
-
 
   /**
    *
@@ -52,7 +52,7 @@ export default function TaskColumn({ column }: TaskColumnProps) {
    */
 
   return (
-    <div key={column.name} className="inner_Task_Column_Container">
+    <div key={column.name} ref={drop} className="inner_Task_Column_Container">
       <div className={`status_Name_Container`}>{column.name}</div>
       <div className="subTask_Container">
         {column?.tasks.map((task, index) => (
