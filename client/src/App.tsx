@@ -45,21 +45,20 @@ const reducer = (state: Inital, action: ActionType): Inital => {
           return { ...column, tasks: newTask };
         });
 
-      columns = boardArr
-        ?.find((element) => element?.name === state?.boardName)
-        ?.columns.map((column) => {
-          if (column.name !== toDrop.column) return column;
+      columns = columns?.map((column) => {
+        if (column.name !== toDrop.column) return column;
 
-          let newTask = [...column.tasks];
-          newTask.splice(toDrop.index, 0, {
-            ...dragged!,
-            status: toDrop.column,
-          });
-
-          return { ...column, tasks: newTask };
+        let newTask = [...column.tasks];
+        newTask.splice(toDrop.index, 0, {
+          ...dragged!,
+          status: toDrop.column,
         });
 
+        return { ...column, tasks: newTask };
+      });
+
       if (!columns) throw new Error("NO COLUMNS");
+
       return {
         ...state,
         storeData: {

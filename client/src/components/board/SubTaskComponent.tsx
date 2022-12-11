@@ -11,7 +11,7 @@ export interface TaskProps {
   storeGModalArr: (elementItems: Task) => void;
 }
 
-export interface TaskPosition{
+export interface TaskPosition {
   column: string;
   index: number;
 }
@@ -32,8 +32,7 @@ export default function SubTaskComponent({
   changeModalStatus,
   storeGModalArr,
 }: TaskProps) {
-
-  const [,dispatch] = useContext(KanbanInfo)!
+  const [, dispatch] = useContext(KanbanInfo)!;
 
   const isCompletedCount = useMemo(() => {
     return calcuateCompleteSubTask(data.subtasks);
@@ -41,15 +40,18 @@ export default function SubTaskComponent({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.SUBTASK,
-    item: () => {
-      return { column: data.status,index };
-    },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.SUBTASK,
+      item: () => {
+        return { column: data.status, index };
+      },
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      }),
     }),
-  }),[data.status,index]);
+    [data.status, index]
+  );
 
   {
     /*
@@ -61,28 +63,28 @@ export default function SubTaskComponent({
 */
   }
 
-  const [{isOver}, drop] = useDrop(() => ({
-    accept: ItemTypes.SUBTASK,
-    drop: (item: TaskPosition) => {
-      //fromDrag grabs the current div we selected that we want to move
-      const fromDrag = { column: item.column, index: item.index }
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.SUBTASK,
+      drop: (item: TaskPosition) => {
+        //fromDrag grabs the current div we selected that we want to move
+        const fromDrag = { column: item.column, index: item.index };
 
-      //toDrop will update our State
-      const toDrop = { column: data.status, index: index}
+        //toDrop will update our State
+        const toDrop = { column: data.status, index: index };
 
-      dispatch({type: "MOVETASK", subtask:{fromDrag,toDrop} })
-    },
-    collect:(monitor)=>({
-      isOver: !!monitor.isOver(),
+        dispatch({ type: "MOVETASK", subtask: { fromDrag, toDrop } });
+      },
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
     }),
-  }),
-  [data,index]
+    [data, index]
   );
 
   drag(drop(ref));
 
   return (
-    
     <div
       className="task_Title"
       onDoubleClick={() => {
@@ -93,13 +95,12 @@ export default function SubTaskComponent({
       style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",
-        borderStyle: isOver ? 'dashed': undefined
+        borderStyle: isOver ? "dashed" : undefined,
       }}
     >
       {data.title}
 
       <div>{`${isCompletedCount} of ${data.subtasks.length} SubTask`}</div>
-
     </div>
   );
 }
