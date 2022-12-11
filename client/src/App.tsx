@@ -15,7 +15,7 @@ const initalState: Inital = {
   modalTaskArr: {} as Task,
 };
 
-const reducer = (state: Inital, action: ActionType) => {
+const reducer = (state: Inital, action: ActionType): Inital => {
   switch (action.type) {
     case "STOREAPI":
       return { ...state, storeData: action.data };
@@ -25,36 +25,56 @@ const reducer = (state: Inital, action: ActionType) => {
       return { ...state, modalTaskArr: action.elementItems };
     case "MOVETASK":
       let dragged: Task | null = null;
-      const {fromDrag,toDrop} = action.subtask;
+      const { fromDrag, toDrop } = action.subtask;
 
-      const boardArr = state?.storeData?.boards;
+      let boardArr = state.storeData.boards ?? [];
 
-      let board = boardArr?.find(
-        (element) => element?.name === state?.boardName
-      )?.columns.map((column)=>{
-        console.log(column)
-        if(column.name !== fromDrag.column) return column;
+      //we use find to target the correct board, instead of all of the board.
 
-        dragged = column.tasks[fromDrag.index]
-        const newTask = column.tasks.filter((element,index)=>index !== fromDrag.index);
+      //remove dragged element
+      let columns = boardArr
+        ?.find((element) => element?.name === state?.boardName)
+        ?.columns.map((column) => {
+          if (column.name !== fromDrag.column) return column;
 
-        return{...column, tasks: newTask}
-      });
+          dragged = column.tasks[fromDrag.index];
+          let newTask = column.tasks.filter(
+            (element, index) => index !== fromDrag.index
+          );
 
+          return { ...column, tasks: newTask };
+        });
 
-      board = boardArr?.find(
-        (element) => element?.name === state?.boardName
-      )?.columns.map((column)=>{
-        if(column.name !== toDrop.column) return column;
+      columns = boardArr
+        ?.find((element) => element?.name === state?.boardName)
+        ?.columns.map((column) => {
+          if (column.name !== toDrop.column) return column;
 
-        const newTask = [...column.tasks];
-        newTask.splice(toDrop.index,0,{...dragged!, status: toDrop.column});
+          let newTask = [...column.tasks];
+          newTask.splice(toDrop.index, 0, {
+            ...dragged!,
+            status: toDrop.column,
+          });
 
-        return {...column, tasks: newTask}
-      })
+          return { ...column, tasks: newTask };
+        });
 
-      return{...state, board};
-
+      if (!columns) throw new Error("NO COLUMNS");
+      return {
+        ...state,
+        storeData: {
+          boards: boardArr.map((board) => {
+            if (board.name === state.boardName) {
+              return { ...board, columns: columns };
+            } else {
+              return board;
+            }
+            // check if board.name ==state.boardName
+            // if so, update board with{...board, columns}
+            // else board
+          }),
+        },
+      };
     default:
       return state;
   }
@@ -94,3 +114,71 @@ function App() {
 
 export default App;
 //https://frontend.turing.edu/lessons/module-3/advanced-react-hooks.html
+
+{
+  /**
+
+let board = boardArr
+        ?.find((element) => element?.name === state?.boardName)
+        ?.columns.map((column) => {
+          if (column.name !== fromDrag.column) return column;
+
+          dragged = column.tasks[fromDrag.index];
+          const newTask = column.tasks.filter(
+            (element, index) => index !== fromDrag.index
+          );
+
+          return { ...column, tasks: newTask };
+        });
+
+
+
+        board = boardArr
+        ?.find((element) => element?.name === state?.boardName)
+        ?.columns.map((column) => {
+          if (column.name !== toDrop.column) return column;
+
+          const newTask = [...column.tasks];
+          newTask.splice(toDrop.index, 0, {
+            ...dragged!,
+            status: toDrop.column,
+          });
+
+          return { ...column, tasks: newTask };
+        });
+*/
+}
+
+{
+  /**
+let board = boardArr.map((element) => {
+        return element.columns.map((column) => {
+          if (column.name !== fromDrag.column) return column;
+
+          dragged = column.tasks[fromDrag.index];
+          const newTask = column.tasks.filter(
+            (element, index) => index !== fromDrag.index
+          );
+
+          return { ...column, tasks: newTask };
+        });
+      });
+
+      //add dragged element
+      board = boardArr.map((element) => {
+        return element.columns.map((column) => {
+          if (column.name !== toDrop.column) return column;
+
+          const newTask = [...column.tasks];
+          newTask.splice(toDrop.index, 0, {
+            ...dragged!,
+            status: toDrop.column,
+          });
+
+          return { ...column, tasks: newTask };
+        });
+      });
+
+
+*/
+}
